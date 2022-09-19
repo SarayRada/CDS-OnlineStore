@@ -1,17 +1,11 @@
 
-class Product(image:String, description: String, attribute: String, price: Double, reference:String){
-    private var productImage:String
-    private var productDescription:String
-    private var productHighlightAttribute:String
-    private var productPrice: Double
-    private var productReference:String
-    init {
-        productImage = image
-        productDescription = description
-        productHighlightAttribute = attribute
-        productPrice = price
-        productReference = reference
-    }
+class Product(image:String, description: String, attribute: String, longDescription:String, price: Double, reference:String){
+    private var productImage:String = image
+    private var productDescription:String = description
+    private var productHighlightAttribute:String = attribute
+    private var productPrice: Double = price
+    private var productReference:String = reference
+    private var productLongDescription:String = longDescription
     fun showProductImage():String{
         return productImage
     }
@@ -26,5 +20,8 @@ class Product(image:String, description: String, attribute: String, price: Doubl
     }
     fun showProductReference(): String{
         return  productReference
+    }
+    fun showLongDescription():String{
+        return productLongDescription
     }
 }
