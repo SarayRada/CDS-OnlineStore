@@ -13,7 +13,7 @@ class Screen(store:Store){
     }
 
     fun askforProduct():Product{
-        println("Which product would you like to explore?")
+        println("Enter a produt's reference:")
         val reference = readln()
         return storeToShow.takeOneProduct(reference)
     }
@@ -25,16 +25,19 @@ class Screen(store:Store){
         println("SUMARY:\n${product.showProductDescription()}\n")
         println("Description:\n${product.showProductAttribute()}\n${product.showLongDescription()}\n")
     }
-    fun askForNextStep(): Any{
+    fun askForNextStep(){
         println(
             """What would you like to do next?
             |1. Add product to cart..
             |2. Keep browsing..""".trimMargin()
         )
         when (readln()){
-            "1" -> return ""
-            "2" -> return  showInformation()
-            else -> return askForNextStep()
+            "1" -> false
+            "2" -> {
+                showSortedStocklowerThan()
+                nextStep()
+            }
+            else -> askForNextStep()
         }
     }
 
@@ -55,13 +58,17 @@ class Screen(store:Store){
 
     fun nextStep(){
         println("""What would you like to do next?:
-                2. Keep browsing the catalog
-                3. See a product's details.""")
+            |2. Keep browsing the catalog
+            |3. See a product's details.
+        """.trimMargin())
         when (readln()){
-            "2" -> showSortedStocklowerThan()
+            "2" -> {
+                showSortedStocklowerThan()
+                nextStep()
+            }
             "3" -> {
-                println("Enter a produt's reference:")
                 showProductInformation(askforProduct())
+                askForNextStep()
             }
         }
     }

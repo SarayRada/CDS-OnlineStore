@@ -3,15 +3,8 @@ class OnlineStore{
     private var output: Screen = Screen(stock)
     private var reference: String = ""
 
-    fun showProducts(){
+    fun showStock(){
         output.showSortedStocklowerThan()
         output.nextStep()
-    }
-    fun showStock(){
-        output.showInformation()
-    }
-    fun showProductInformation(){
-       output.showProductInformation(output.askforProduct())
-       output.askForNextStep()
     }
 }

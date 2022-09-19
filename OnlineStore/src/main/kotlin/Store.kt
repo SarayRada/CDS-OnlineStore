@@ -22,7 +22,6 @@ class Store (){
     fun showMyProducts():MutableList<Product>{
         return productsStock //filtrar por products sin la misma referencia
     }
-
     fun takeOneProduct(reference:String):Product{
       for (product in productsStock){
           if (product.showProductReference() == reference){
