@@ -13,9 +13,6 @@ class Store (){
             1003.00,
             "X4A"))
     var productToShow:Product =Product("", "", "", "", 0.0, "")
-    fun showStore():MutableList<Product>{
-        return productsStock
-    }
     fun showProduct(reference: String): Product{
         for (product in productsStock){
             if (reference == product.showProductReference()) {
@@ -34,5 +31,5 @@ class Store (){
     }
     fun showStoreLowerThan(price:Double):List<Product>{
         return productsStock.filter { it.showProductPrice() <= price }
-    }
+    } // filtrar los que tienen la misma referencia
    }

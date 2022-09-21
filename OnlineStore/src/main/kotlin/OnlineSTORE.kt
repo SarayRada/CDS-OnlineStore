@@ -15,6 +15,10 @@ class OnlineStore{
                 output.showProductInformation(stock.showProduct(output.askForAProduct()))
                 nextStep(output.askForProductNextStep())
             }
+            "4" -> {
+                output.showShoppingCart(cart)
+                nextStep(output.askForCheckout())
+            }
         }
     }
     fun showProducts(){

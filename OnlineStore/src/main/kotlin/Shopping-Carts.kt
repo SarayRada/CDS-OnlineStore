@@ -19,8 +19,8 @@ class ShoppingCart(){
     }
     fun seeMyCart(): MutableList<Product>{
         return shoppingCart
-    }
-    private fun howManyOfThisProduct(reference: String):Int{
+    } // filtrar los que tienen la misma referencia
+    fun howManyOfThisProduct(reference: String):Int{
         var cantidad = 0
         for (product in shoppingCart){
             if (product.showProductReference() == reference) cantidad ++

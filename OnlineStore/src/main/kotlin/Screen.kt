@@ -19,6 +19,7 @@ class Screen(store:Store){
             |
             |2. Keep browsing the catalog
             |3. See product's details.
+            |4. Go to checkout.
         """.trimMargin())
         return readln()
     }
@@ -47,6 +48,31 @@ class Screen(store:Store){
     }
     fun showProductSumary(description:String){
         println("$description was added to cart.\n")
+    }
+    fun showShoppingCart(shoppingCart: ShoppingCart){
+        for (product in shoppingCart.seeMyCart()) {
+            println("**** SHOPPING CART ****\n")
+            println(product.showProductImage())
+            println(product.showProductDescription())
+            println("--")
+            println("\uD83D\uDCB0 Price: ${product.showProductPrice()} €.")
+            println("Reference: ${product.showProductReference()}")
+            println("Units: ${shoppingCart.howManyOfThisProduct(product.showProductReference())}")
+            println("Subtotal: ${shoppingCart.calculatePriceOfProduct(product)}")
+            println("--\n")
+        }
+        println("""TOTAL:
+            |${shoppingCart.calculateTotal()}
+            |
+            |*************************
+        """.trimMargin())
+    }
+    fun askForCheckout():String{
+        println("""What would you like to do next?:
+            |2. Keep browsing the catalog.
+            |5.Confirm Purchase and Pay.
+        """.trimMargin())
+        return readln()
     }
 
 
