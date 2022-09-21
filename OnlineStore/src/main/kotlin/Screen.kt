@@ -47,7 +47,7 @@ class Screen(store:Store){
         return readln()
     }
     fun showProductSumary(description:String){
-        println("$description was added to cart.\n")
+        println("\n$description was added to cart.\n")
     }
     fun showShoppingCart(shoppingCart: ShoppingCart){
         for (product in shoppingCart.seeMyCart()) {
