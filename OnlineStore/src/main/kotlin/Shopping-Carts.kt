@@ -1,2 +1,4 @@
-class ShoppingCart {
+class ShoppingCart(){
+    var shoppingCart = mutableListOf<Product>()
+
 }

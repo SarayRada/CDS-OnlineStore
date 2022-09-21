@@ -6,22 +6,11 @@ class Product(image:String, description: String, attribute: String, longDescript
     private var productPrice: Double = price
     private var productReference:String = reference
     private var productLongDescription:String = longDescription
-    fun showProductImage():String{
-        return productImage
-    }
-    fun showProductDescription(): String{
-        return  productDescription
-    }
-    fun showProductAttribute(): String{
-        return  productHighlightAttribute
-    }
-    fun showProductPrice(): Double{
-        return  productPrice
-    }
-    fun showProductReference(): String{
-        return  productReference
-    }
-    fun showLongDescription():String{
-        return productLongDescription
-    }
+
+    fun showProductImage(): String =  productImage
+    fun showProductDescription(): String = productDescription
+    fun showProductAttribute(): String = productHighlightAttribute
+    fun showProductPrice(): Double = productPrice
+    fun showProductReference(): String = productReference
+    fun showLongDescription():String = productLongDescription
 }
