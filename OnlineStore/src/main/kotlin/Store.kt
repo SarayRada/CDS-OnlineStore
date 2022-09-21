@@ -12,12 +12,16 @@ class Store (){
             "",
             1003.00,
             "X4A"))
+    var productToShow:Product =Product("", "", "", "", 0.0, "")
     fun showStore():MutableList<Product>{
         return productsStock
     }
     fun showProduct(reference: String): Product{
         for (product in productsStock){
-            if (reference == product.showProductReference()) return product
+            if (reference == product.showProductReference()) {
+                productToShow = product
+                return product
+            }
         }
         throw IllegalArgumentException ("That product doesn't exist")
     }
@@ -27,5 +31,8 @@ class Store (){
             if (product.showProductReference() == reference) cantidad ++
         }
         return cantidad
+    }
+    fun showStoreLowerThan(price:Double):List<Product>{
+        return productsStock.filter { it.showProductPrice() <= price }
     }
    }

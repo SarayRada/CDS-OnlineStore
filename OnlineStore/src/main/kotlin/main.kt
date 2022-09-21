@@ -1,4 +1,4 @@
-fun main(){
+fun main() {
     val onlineStore: OnlineStore = OnlineStore()
     onlineStore.showProducts()
 }

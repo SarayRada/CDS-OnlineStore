@@ -1,7 +1,11 @@
 class Screen(store:Store){
     private var storeToShow: Store = store
-    fun showProducts(){
-        for (product in storeToShow.showStore()){
+    fun askForProductsLowerThan():Double{
+        println("Browse products with prices lower than:")
+        return readln().toDouble()
+    }
+    fun showProducts(list: List<Product>){
+        for (product in list){
             println(product.showProductImage())
             println(product.showProductDescription())
             println(product.showProductAttribute())
@@ -9,6 +13,14 @@ class Screen(store:Store){
             println("Reference: ${product.showProductReference()}\n")
         }
 
+    }
+    fun askForCatalogueNextStep():String{
+        println("""What would you like to do next?
+            |
+            |2. Keep browsing the catalog
+            |3. See product's details.
+        """.trimMargin())
+        return readln()
     }
     fun askForAProduct():String{
         println("Which product do you like to explore?\nEnter a produt's reference:")
@@ -33,4 +45,9 @@ class Screen(store:Store){
         """.trimMargin())
         return readln()
     }
+    fun showProductSumary(description:String){
+        println("$description was added to cart.\n")
+    }
+
+
 }
