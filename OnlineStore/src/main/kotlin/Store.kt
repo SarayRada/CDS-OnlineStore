@@ -1,3 +1,6 @@
+import com.sun.jdi.StringReference
+import java.security.InvalidParameterException
+
 class Store (){
     private var productsStock:  MutableList<Product> = mutableListOf(
         Product("\uD83D\uDCFA",
@@ -19,14 +22,18 @@ class Store (){
             300.99,
             "W2C"))
     var productToShow:Product =Product("", "", "", "", 0.0, "")
-    fun showProduct(reference: String): Product{
-        for (product in productsStock){
-            if (reference == product.showProductReference()) {
-                productToShow = product
-                return product
+    fun showProduct(reference: String): Product?{
+        try {
+            for (product in productsStock) {
+                if (reference == product.showProductReference()) {
+                    productToShow = product
+                    return product
+                }
             }
+        } finally {
+           println("Product doesn't exist")
         }
-        throw IllegalArgumentException ("That product doesn't exist")
+       return null
     }
     fun howManyOfThisProduct(reference: String):Int{
         var cantidad = 0
