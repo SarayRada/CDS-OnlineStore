@@ -27,16 +27,20 @@ class Screen(store:Store){
         println("Which product do you like to explore?\nEnter a produt's reference:")
         return readln()
     }
-    fun showProductInformation(product:Product){
-        println(product.showProductImage())
-        println("\uD83D\uDCB0 Price: ${product.showProductPrice()} €.")
-        println("Reference: ${product.showProductReference()}")
-        println("${storeToShow.howManyOfThisProduct(product.showProductReference())} left.\n")
-        println("SUMMARY:")
-        println("${product.showProductDescription()}\n")
-        println("DESCRIPTION:\n" +
-                "${product.showProductAttribute()}\n" +
-                "${product.showLongDescription()}\n")
+    fun showProductInformation(product:Product?){
+        if (product != null) {
+            println(product.showProductImage())
+            println("\uD83D\uDCB0 Price: ${product.showProductPrice()} €.")
+            println("Reference: ${product.showProductReference()}")
+            println("${storeToShow.howManyOfThisProduct(product.showProductReference())} left.\n")
+            println("SUMMARY:")
+            println("${product.showProductDescription()}\n")
+            println(
+                "DESCRIPTION:\n" +
+                        "${product.showProductAttribute()}\n" +
+                        "${product.showLongDescription()}\n"
+            )
+        }
     }
     fun askForProductNextStep():String{
         println("""What would you like to do next?
