@@ -1,7 +1,4 @@
-class OnlineStore{
-    private var stock: Store = Store()
-    private var output: Screen = Screen(stock)
-    private var cart: ShoppingCart = ShoppingCart()
+class OnlineStore(private var stock: Store, private var output: Screen, private var cart: ShoppingCart){
     private fun nextStep(step: String){
         when(step){
             "1" -> {

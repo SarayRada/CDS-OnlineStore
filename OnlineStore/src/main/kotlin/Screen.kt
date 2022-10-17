@@ -1,5 +1,4 @@
-class Screen(store:Store){
-    private var storeToShow: Store = store
+class Screen(private var storeToShow:Store){
     fun askForProductsLowerThan():Double{
         println("Browse products with prices lower than:")
         return readln().toDouble()
