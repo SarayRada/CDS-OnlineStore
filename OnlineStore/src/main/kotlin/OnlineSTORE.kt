@@ -20,6 +20,6 @@ class OnlineStore(private var stock: Store, private var output: Screen, private 
     }
     fun showProducts(){
         output.showProducts(stock.showStoreLowerThan(output.askForProductsLowerThan()))
-        nextStep(output.askForCatalogueNextStep())
+        this.nextStep(output.askForCatalogueNextStep())
     }
 }

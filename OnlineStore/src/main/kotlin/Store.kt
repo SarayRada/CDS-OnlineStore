@@ -25,7 +25,7 @@ class Store (){
     fun showProduct(reference: String): Product?{
         try {
             for (product in productsStock) {
-                if (reference == product.showProductReference()) {
+                if (reference == product.productReference) {
                     productToShow = product
                     return product
                 }
@@ -38,11 +38,11 @@ class Store (){
     fun howManyOfThisProduct(reference: String):Int{
         var cantidad = 0
         for (product in productsStock){
-            if (product.showProductReference() == reference) cantidad ++
+            if (product.productReference == reference) cantidad ++
         }
         return cantidad
     }
     fun showStoreLowerThan(price:Double):List<Product>{
-        return productsStock.filter { it.showProductPrice() <= price }.distinctBy { it.showProductReference() }
+        return productsStock.filter { it.productPrice <= price }.distinctBy { it.productReference }
     } // filtrar los que tienen la misma referencia
    }

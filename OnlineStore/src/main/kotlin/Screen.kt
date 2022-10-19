@@ -5,11 +5,11 @@ class Screen(private var storeToShow:Store){
     }
     fun showProducts(list: List<Product>){
         for (product in list){
-            println(product.showProductImage())
-            println(product.showProductDescription())
-            println(product.showProductAttribute())
-            println("\uD83D\uDCB0 Price: ${product.showProductPrice()}€.")
-            println("Reference: ${product.showProductReference()}\n")
+            println(product.productImage)
+            println(product.productDescription)
+            println(product.productHighlightAttribute)
+            println("\uD83D\uDCB0 Price: ${product.productPrice}€.")
+            println("Reference: ${product.productReference}\n")
         }
 
     }
@@ -28,16 +28,16 @@ class Screen(private var storeToShow:Store){
     }
     fun showProductInformation(product:Product?){
         if (product != null) {
-            println(product.showProductImage())
-            println("\uD83D\uDCB0 Price: ${product.showProductPrice()} €.")
-            println("Reference: ${product.showProductReference()}")
-            println("${storeToShow.howManyOfThisProduct(product.showProductReference())} left.\n")
+            println(product.productImage)
+            println("\uD83D\uDCB0 Price: ${product.productPrice} €.")
+            println("Reference: ${product.productReference}")
+            println("${storeToShow.howManyOfThisProduct(product.productReference)} left.\n")
             println("SUMMARY:")
-            println("${product.showProductDescription()}\n")
+            println("${product.productDescription}\n")
             println(
                 "DESCRIPTION:\n" +
-                        "${product.showProductAttribute()}\n" +
-                        "${product.showLongDescription()}\n"
+                        "${product.productHighlightAttribute}\n" +
+                        "${product.productLongDescription}\n"
             )
         }
     }
@@ -55,12 +55,12 @@ class Screen(private var storeToShow:Store){
     fun showShoppingCart(shoppingCart: ShoppingCart){
         for (product in shoppingCart.seeMyCart()) {
             println("**** SHOPPING CART ****\n")
-            println(product.showProductImage())
-            println(product.showProductDescription())
+            println(product.productImage)
+            println(product.productDescription)
             println("--")
-            println("\uD83D\uDCB0 Price: ${product.showProductPrice()} €.")
-            println("Reference: ${product.showProductReference()}")
-            println("Units: ${shoppingCart.howManyOfThisProduct(product.showProductReference())}")
+            println("\uD83D\uDCB0 Price: ${product.productPrice} €.")
+            println("Reference: ${product.productReference}")
+            println("Units: ${shoppingCart.howManyOfThisProduct(product.productReference)}")
             println("Subtotal: ${shoppingCart.calculatePriceOfProduct(product)}")
             println("--\n")
         }

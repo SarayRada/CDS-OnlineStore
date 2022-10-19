@@ -4,26 +4,26 @@ class ShoppingCart(){
         shoppingCart.add(product)
     }
     fun calculatePriceOfProduct(product:Product):Double{
-        val multiply = howManyOfThisProduct(product.showProductReference())
-        return product.showProductPrice() * multiply
+        val multiply = howManyOfThisProduct(product.productReference)
+        return product.productPrice * multiply
     }
     fun seeProductSummary():String{
-        return shoppingCart.last().showProductDescription()
+        return shoppingCart.last().productDescription
     }
     fun calculateTotal():Double{
         var total = 0.0
-        for (product in shoppingCart.distinctBy { it.showProductReference() }){
+        for (product in shoppingCart.distinctBy { it.productReference }){
             total += calculatePriceOfProduct(product)
         }
         return total
     }
     fun seeMyCart(): List<Product>{
-        return shoppingCart.distinctBy { it.showProductReference() }
+        return shoppingCart.distinctBy { it.productReference }
     } // filtrar los que tienen la misma referencia
     fun howManyOfThisProduct(reference: String):Int{
         var cantidad = 0
         for (product in shoppingCart){
-            if (product.showProductReference() == reference) cantidad ++
+            if (product.productReference == reference) cantidad ++
         }
         return cantidad
     }
