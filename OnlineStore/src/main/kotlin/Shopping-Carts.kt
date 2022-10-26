@@ -1,14 +1,8 @@
 class ShoppingCart(){
-    private var shoppingCart = mutableListOf<Product>()
+    var shoppingCart = mutableListOf<Product>()
+        private set
     fun addAProductToTheCart(product: Product){
         shoppingCart.add(product)
-    }
-    fun calculatePriceOfProduct(product:Product):Double{
-        val multiply = howManyOfThisProduct(product.productReference)
-        return product.productPrice * multiply
-    }
-    fun seeProductSummary():String{
-        return shoppingCart.last().productDescription
     }
     fun calculateTotal():Double{
         var total = 0.0
@@ -17,9 +11,16 @@ class ShoppingCart(){
         }
         return total
     }
+    fun calculatePriceOfProduct(product:Product):Double{
+        val multiply = howManyOfThisProduct(product.productReference)
+        return product.productPrice * multiply
+    }
+    fun seeProductSummary():String{
+        return shoppingCart.last().productDescription
+    }
     fun seeMyCart(): List<Product>{
         return shoppingCart.distinctBy { it.productReference }
-    } // filtrar los que tienen la misma referencia
+    }
     fun howManyOfThisProduct(reference: String):Int{
         var cantidad = 0
         for (product in shoppingCart){

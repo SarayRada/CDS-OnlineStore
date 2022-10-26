@@ -1,4 +1,4 @@
-class Screen(private var storeToShow:Store){
+class Screen(private var handleStoreToShow:Store){
     fun askForProductsLowerThan():Double{
         println("Browse products with prices lower than:")
         return readln().toDouble()
@@ -13,6 +13,21 @@ class Screen(private var storeToShow:Store){
         }
 
     }
+    fun showProductInformation(product:Product?){
+        if (product != null) {
+            println(product.productImage)
+            println("\uD83D\uDCB0 Price: ${product.productPrice} €.")
+            println("Reference: ${product.productReference}")
+            println("${handleStoreToShow.howManyOfThisProduct(product.productReference)} left.\n")
+            println("SUMMARY:")
+            println("${product.productDescription}\n")
+            println(
+                "DESCRIPTION:\n" +
+                        "${product.productHighlightAttribute}\n" +
+                        "${product.productLongDescription}\n"
+            )
+        }
+    }
     fun askForCatalogueNextStep():String{
         println("""What would you like to do next?
             |
@@ -25,21 +40,6 @@ class Screen(private var storeToShow:Store){
     fun askForAProduct():String{
         println("Which product do you like to explore?\nEnter a produt's reference:")
         return readln()
-    }
-    fun showProductInformation(product:Product?){
-        if (product != null) {
-            println(product.productImage)
-            println("\uD83D\uDCB0 Price: ${product.productPrice} €.")
-            println("Reference: ${product.productReference}")
-            println("${storeToShow.howManyOfThisProduct(product.productReference)} left.\n")
-            println("SUMMARY:")
-            println("${product.productDescription}\n")
-            println(
-                "DESCRIPTION:\n" +
-                        "${product.productHighlightAttribute}\n" +
-                        "${product.productLongDescription}\n"
-            )
-        }
     }
     fun askForProductNextStep():String{
         println("""What would you like to do next?
@@ -77,6 +77,4 @@ class Screen(private var storeToShow:Store){
         """.trimMargin())
         return readln()
     }
-
-
 }
