@@ -6,25 +6,25 @@ class ShoppingCart(){
     }
     fun calculateTotal():Double{
         var total = 0.0
-        for (product in shoppingCart.distinctBy { it.productReference }){
+        for (product in shoppingCart.distinctBy { it.reference }){
             total += calculatePriceOfProduct(product)
         }
         return total
     }
     fun calculatePriceOfProduct(product:Product):Double{
-        val multiply = howManyOfThisProduct(product.productReference)
-        return product.productPrice * multiply
+        val multiply = howManyOfThisProduct(product.reference)
+        return product.price * multiply
     }
     fun seeProductSummary():String{
-        return shoppingCart.last().productDescription
+        return shoppingCart.last().description
     }
     fun seeMyCart(): List<Product>{
-        return shoppingCart.distinctBy { it.productReference }
+        return shoppingCart.distinctBy { it.reference }
     }
     fun howManyOfThisProduct(reference: String):Int{
         var cantidad = 0
         for (product in shoppingCart){
-            if (product.productReference == reference) cantidad ++
+            if (product.reference == reference) cantidad ++
         }
         return cantidad
     }

@@ -2,25 +2,25 @@ class Screen {
 
     fun showProducts(list: List<Product>){
         for (product in list){
-            println(product.productImage)
-            println(product.productDescription)
-            println(product.productHighlightAttribute)
-            println("\uD83D\uDCB0 Price: ${product.productPrice}€.")
-            println("Reference: ${product.productReference}\n")
+            println(product.image)
+            println(product.description)
+            println(product.highlightAttribute)
+            println("\uD83D\uDCB0 Price: ${product.price}€.")
+            println("Reference: ${product.reference}\n")
         }
     }
     fun showProductInformation(product:Product?, howManyOfThisProduct:Int){
         if (product != null) {
-            println(product.productImage)
-            println("\uD83D\uDCB0 Price: ${product.productPrice} €.")
-            println("Reference: ${product.productReference}")
+            println(product.image)
+            println("\uD83D\uDCB0 Price: ${product.price} €.")
+            println("Reference: ${product.reference}")
             println("$howManyOfThisProduct left.\n")
             println("SUMMARY:")
-            println("${product.productDescription}\n")
+            println("${product.description}\n")
             println(
                 "DESCRIPTION:\n" +
-                        "${product.productHighlightAttribute}\n" +
-                        "${product.productLongDescription}\n"
+                        "${product.highlightAttribute}\n" +
+                        "${product.longDescription}\n"
             )
         }
     }
@@ -30,12 +30,12 @@ class Screen {
     fun showShoppingCart(shoppingCart: ShoppingCart){
         for (product in shoppingCart.seeMyCart()) {
             println("**** SHOPPING CART ****\n")
-            println(product.productImage)
-            println(product.productDescription)
+            println(product.image)
+            println(product.description)
             println("--")
-            println("\uD83D\uDCB0 Price: ${product.productPrice} €.")
-            println("Reference: ${product.productReference}")
-            println("Units: ${shoppingCart.howManyOfThisProduct(product.productReference)}")
+            println("\uD83D\uDCB0 Price: ${product.price} €.")
+            println("Reference: ${product.reference}")
+            println("Units: ${shoppingCart.howManyOfThisProduct(product.reference)}")
             println("Subtotal: ${shoppingCart.calculatePriceOfProduct(product)}")
             println("--\n")
         }
