@@ -1,8 +1,8 @@
 class ShoppingCart(){
     var shoppingCart = mutableListOf<Product>()
         private set
-    fun addAProductToTheCart(product: Product){
-        shoppingCart.add(product)
+    fun addAProductToTheCart(product: Product?){
+        if (product != null) shoppingCart.add(product)
     }
     fun calculateTotal():Double{
         var total = 0.0

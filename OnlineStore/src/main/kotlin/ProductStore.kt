@@ -1,5 +1,5 @@
 class ProductStore {
-    var productsStock:  MutableList<Product> = mutableListOf(
+    var productsStore:  MutableList<Product> = mutableListOf(
         Product("\uD83D\uDCFA",
             "Glamorous panoramic television, 13 inches",
             "With this panoramic television, your friday nights will be boring no more.",
