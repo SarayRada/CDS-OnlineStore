@@ -1,9 +1,9 @@
-class Store (private var dataStore:DataStore){
+class StoreQueries (private var productStore:ProductStore){
     var productToShow:Product =Product("", "", "", "", 0.0, "")
         private set
     fun showProduct(reference: String): Product?{
         try {
-            for (product in dataStore.productsStock) {
+            for (product in productStore.productsStock) {
                 if (reference == product.productReference) {
                     productToShow = product
                     return product
@@ -14,15 +14,15 @@ class Store (private var dataStore:DataStore){
         }
        return null
     }
-    fun howManyOfThisProduct(reference: String):Int{
+    fun showHowManyOfThisProduct(reference: String):Int{
         var cantidad = 0
         // ¿por qué no puedo poner un private set? --> está dentro de una función
-        for (product in dataStore.productsStock){
+        for (product in productStore.productsStock){
             if (product.productReference == reference) cantidad ++
         }
         return cantidad
     }
     fun showStoreLowerThan(price:Double):List<Product>{
-        return dataStore.productsStock.filter { it.productPrice <= price }.distinctBy { it.productReference }
+        return productStore.productsStock.filter { it.productPrice <= price }.distinctBy { it.productReference }
         }
    }

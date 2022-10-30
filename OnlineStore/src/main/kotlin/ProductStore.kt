@@ -1,4 +1,4 @@
-class DataStore {
+class ProductStore {
     var productsStock:  MutableList<Product> = mutableListOf(
         Product("\uD83D\uDCFA",
             "Glamorous panoramic television, 13 inches",

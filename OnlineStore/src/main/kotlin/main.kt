@@ -1,7 +1,7 @@
 fun main() {
-    val handleStore: Store =Store (DataStore())
-    val screen: Screen = Screen(handleStore)
+    val storeQueries: StoreQueries =StoreQueries (ProductStore())
+    val screen: Screen = Screen()
     val shoppingCart: ShoppingCart = ShoppingCart()
-    val onlineStore: OnlineStore = OnlineStore(handleStore, screen, shoppingCart)
+    val onlineStore: OnlineStore = OnlineStore(storeQueries, screen, shoppingCart)
     onlineStore.showProducts()
 }

@@ -1,4 +1,4 @@
-class Screen(private var handleStoreToShow:Store){
+class Screen {
     fun askForProductsLowerThan():Double{
         println("Browse products with prices lower than:")
         return readln().toDouble()
@@ -11,14 +11,13 @@ class Screen(private var handleStoreToShow:Store){
             println("\uD83D\uDCB0 Price: ${product.productPrice}€.")
             println("Reference: ${product.productReference}\n")
         }
-
     }
-    fun showProductInformation(product:Product?){
+    fun showProductInformation(product:Product?, howManyOfThisProduct:Int){
         if (product != null) {
             println(product.productImage)
             println("\uD83D\uDCB0 Price: ${product.productPrice} €.")
             println("Reference: ${product.productReference}")
-            println("${handleStoreToShow.howManyOfThisProduct(product.productReference)} left.\n")
+            println("$howManyOfThisProduct left.\n")
             println("SUMMARY:")
             println("${product.productDescription}\n")
             println(
