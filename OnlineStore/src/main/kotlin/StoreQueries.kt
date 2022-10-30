@@ -1,22 +1,18 @@
 class StoreQueries (private var productStore:ProductStore){
+    private val stock get() = productStore.stock
     fun getAProduct(reference: String): Product?{
-        for (product in productStore.productsStore) {
-            if (reference == product.productReference) {
-                return product
-            }
+        return try {
+           stock.first { it.productReference == reference }
+        } catch (ex: NoSuchElementException) {
+            println("That product doesn't exist")
+            null
         }
-        println("That product doesn't exist")
-        return null
     }
     fun getTheAmountOfAProduct(reference: String):Int{
-        var cantidad = 0
-        // ¿por qué no puedo poner un private set? --> está dentro de una función
-        for (product in productStore.productsStore){
-            if (product.productReference == reference) cantidad ++
-        }
-        return cantidad
+        return stock.count {it.productReference == reference}
     }
     fun getProductsBelowAPrice(price:Double):List<Product>{
-        return productStore.productsStore.filter { it.productPrice <= price }.distinctBy { it.productReference }
+        return stock.filter { it.productPrice <= price }
+            .distinctBy { it.productReference }
         }
    }
