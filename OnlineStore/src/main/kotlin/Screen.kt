@@ -1,5 +1,4 @@
 class Screen {
-
     fun showProducts(list: List<Product>){
         for (product in list){
             println(product.image)
@@ -24,26 +23,32 @@ class Screen {
             )
         }
     }
-    fun showProductSumary(description:String){
+    fun showProductSummary(description:String){
         println("\n$description was added to cart.\n")
     }
-    fun showShoppingCart(shoppingCart: ShoppingCart){
-        for (product in shoppingCart.seeMyCart()) {
+    fun showShoppingCart(cart:MutableList<Product>){
+        val shoppingCart = cart.distinctBy { it.reference }
+        val totalOfTheShopping = shoppingCart.sumOf { it.price }
+        for (product in shoppingCart) {
             println("**** SHOPPING CART ****\n")
             println(product.image)
             println(product.description)
             println("--")
             println("\uD83D\uDCB0 Price: ${product.price} €.")
             println("Reference: ${product.reference}")
-            println("Units: ${shoppingCart.howManyOfThisProduct(product.reference)}")
-            println("Subtotal: ${shoppingCart.calculatePriceOfProduct(product)}")
+            println("Units: ${cart.count { it.reference == product.reference }}")
+            val subtotalCalculation = (product.price) * cart.count { it.reference == product.reference }
+            println("Subtotal: $subtotalCalculation")
             println("--\n")
         }
         println("""TOTAL:
-            |${shoppingCart.calculateTotal()}
+            |$totalOfTheShopping
             |
             |*************************
         """.trimMargin())
+    }
+    fun showNoProductErrorMessage (){
+        println("That product doesn't exist")
     }
     fun askForProductsLowerThan():Double{
         println("Browse products with prices lower than:")
@@ -81,4 +86,5 @@ class Screen {
         """.trimMargin())
         return readln()
     }
+
 }

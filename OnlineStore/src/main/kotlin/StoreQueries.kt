@@ -22,7 +22,6 @@ class StoreQueries (){
         return try {
            stock.first { it.reference == reference }
         } catch (ex: NoSuchElementException) {
-            println("That product doesn't exist")
             null
         }
     }

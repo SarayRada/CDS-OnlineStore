@@ -11,7 +11,8 @@ class OnlineStore(private var storeQueries: StoreQueries, private var screen: Sc
         }
     }
     private fun showShoppingCart() {
-        screen.showShoppingCart(shoppingCart)
+        val cart = shoppingCart.cart
+        screen.showShoppingCart(cart)
         nextStep(screen.askForCheckout())
     }
     private fun showProductInformation() {
@@ -24,11 +25,15 @@ class OnlineStore(private var storeQueries: StoreQueries, private var screen: Sc
     private fun addAProductToCart() {
         val reference = screen.askForAProductReference()
         val productToShow = storeQueries.getAProduct(reference)
-        shoppingCart.addAProductToTheCart(productToShow)
+        if (productToShow != null) {
+            shoppingCart.addAProductToTheCart(productToShow)
+        } else {
+            screen.showNoProductErrorMessage()
+        }
     }
     private fun showProductSummary() {
-        val productSummary = shoppingCart.seeProductSummary()
-        screen.showProductSumary(productSummary)
+        val summary = shoppingCart.getLastProductAdded().reference
+        screen.showProductSummary(summary)
         nextStep(screen.askForCatalogueNextStep())
     }
 
