@@ -1,4 +1,4 @@
-class CounterQuestions {
+class QuestionCounter {
     fun askForProductsLowerThan():Double{
         println("Browse products with prices lower than:")
         return readln().toDouble()
