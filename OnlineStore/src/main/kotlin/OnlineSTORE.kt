@@ -1,4 +1,4 @@
-class OnlineStore(private var storeQueries: StoreQueries, private var screen: Screen, private var shoppingCart: ShoppingCart){
+class OnlineStore(private var storeQueries: StoreQueries, private var counter: Counter, private var counterQuestions: CounterQuestions, private var shoppingCart: ShoppingCart){
     private fun nextStep(step: String){
         when(step){
             "1" -> {
@@ -12,36 +12,35 @@ class OnlineStore(private var storeQueries: StoreQueries, private var screen: Sc
     }
     private fun showShoppingCart() {
         val cart = shoppingCart.cart
-        screen.showShoppingCart(cart)
-        nextStep(screen.askForCheckout())
+        counter.showShoppingCart(cart)
+        nextStep(counterQuestions.askForCheckout())
     }
     private fun showProductInformation() {
-        val reference = screen.askForAProductToExplore()
+        val reference = counterQuestions.askForAProductToExplore()
         val product: Product? = storeQueries.getAProduct(reference)
         val howManyOfAProduct = storeQueries.getTheAmountOfAProduct(reference)
-        screen.showProductInformation(product, howManyOfAProduct)
-        nextStep(screen.askForProductNextStep())
+        counter.showProductInformation(product, howManyOfAProduct)
+        nextStep(counterQuestions.askForProductNextStep())
     }
     private fun addAProductToCart() {
-        val reference = screen.askForAProductReference()
+        val reference = counterQuestions.askForAProductReference()
         val productToShow = storeQueries.getAProduct(reference)
         if (productToShow != null) {
             shoppingCart.addAProductToTheCart(productToShow)
         } else {
-            screen.showNoProductErrorMessage()
+            counter.showNoProductErrorMessage()
         }
     }
     private fun showProductSummary() {
         val summary = shoppingCart.getLastProductAdded().reference
-        screen.showProductSummary(summary)
-        nextStep(screen.askForCatalogueNextStep())
+        counter.showProductSummary(summary)
+        nextStep(counterQuestions.askForCatalogueNextStep())
     }
-
     fun showProducts(){
-        val price = screen.askForProductsLowerThan()
+        val price = counterQuestions.askForProductsLowerThan()
         val productsBelowAPrice = storeQueries.getProductsBelowAPrice(price)
-        screen.showProducts(productsBelowAPrice)
-        val nextStep = screen.askForCatalogueNextStep()
+        counter.showProducts(productsBelowAPrice)
+        val nextStep = counterQuestions.askForCatalogueNextStep()
         this.nextStep(nextStep)
     }
 }
