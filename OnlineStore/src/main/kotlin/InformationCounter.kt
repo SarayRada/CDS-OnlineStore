@@ -1,6 +1,6 @@
-class Counter {
-    fun showProducts(list: List<Product>){
-        for (product in list){
+class InformationCounter {
+    fun showProducts(list: List<Product>) {
+        for (product in list) {
             println(product.image)
             println(product.description)
             println(product.highlightAttribute)
@@ -27,7 +27,7 @@ class Counter {
         println("\n$description was added to cart.\n")
     }
     fun showShoppingCart(cart:MutableList<Product>){
-        val shoppingCart = cart.distinctBy { it.reference }
+        val shoppingCart: List<Product> = cart.distinctBy { it.reference }
         val totalOfTheShopping = shoppingCart.sumOf { it.price }
         for (product in shoppingCart) {
             println("**** SHOPPING CART ****\n")
@@ -51,3 +51,5 @@ class Counter {
         println("That product doesn't exist")
     }
 }
+// ENUM: crear un nuevo tipo de dato que le damos uno svalores en especificos
+// Responsabilidades con los mismos datos: encapsularlo y hacer funciones con esos datos encapsulados en la misma clase

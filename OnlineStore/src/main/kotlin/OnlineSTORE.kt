@@ -1,6 +1,10 @@
-class OnlineStore(private var storeQueries: StoreQueries, private var counter: Counter, private var questionCounter: QuestionCounter, private var shoppingCart: ShoppingCart){
-    private fun nextStep(step: String){
-        when(step){
+class OnlineStore(
+    private val storeQueries: StoreQueries,
+    private val informationCounter: InformationCounter,
+    private val questionCounter: QuestionCounter,
+    private val shoppingCart: ShoppingCart){
+    private fun nextStep(step: String) {
+        when(step) {
             "1" -> {
                 addAProductToCart()
                 showProductSummary()
@@ -11,15 +15,15 @@ class OnlineStore(private var storeQueries: StoreQueries, private var counter: C
         }
     }
     private fun showShoppingCart() {
-        val cart = shoppingCart.cart
-        counter.showShoppingCart(cart)
+        val cart = shoppingCart.productsInCart
+        informationCounter.showShoppingCart(cart)
         nextStep(questionCounter.askForCheckout())
     }
     private fun showProductInformation() {
         val reference = questionCounter.askForAProductToExplore()
         val product: Product? = storeQueries.getAProduct(reference)
         val howManyOfAProduct = storeQueries.getTheAmountOfAProduct(reference)
-        counter.showProductInformation(product, howManyOfAProduct)
+        informationCounter.showProductInformation(product, howManyOfAProduct)
         nextStep(questionCounter.askForProductNextStep())
     }
     private fun addAProductToCart() {
@@ -28,19 +32,21 @@ class OnlineStore(private var storeQueries: StoreQueries, private var counter: C
         if (productToShow != null) {
             shoppingCart.addAProductToTheCart(productToShow)
         } else {
-            counter.showNoProductErrorMessage()
+            informationCounter.showNoProductErrorMessage()
         }
     }
     private fun showProductSummary() {
         val summary = shoppingCart.getLastProductAdded().reference
-        counter.showProductSummary(summary)
+        informationCounter.showProductSummary(summary)
         nextStep(questionCounter.askForCatalogueNextStep())
     }
     fun showProducts(){
         val price = questionCounter.askForProductsLowerThan()
         val productsBelowAPrice = storeQueries.getProductsBelowAPrice(price)
-        counter.showProducts(productsBelowAPrice)
+        informationCounter.showProducts(productsBelowAPrice)
         val nextStep = questionCounter.askForCatalogueNextStep()
         this.nextStep(nextStep)
     }
 }
+
+//OnlineStpre poner value objects
