@@ -1,16 +1,18 @@
 
-class Product(image:String, description: String, attribute: String, longDescription:String, price: Double, reference:String){
-    private var productImage:String = image
-    private var productDescription:String = description
-    private var productHighlightAttribute:String = attribute
-    private var productPrice: Double = price
-    private var productReference:String = reference
-    private var productLongDescription:String = longDescription
-
-    fun showProductImage(): String =  productImage
-    fun showProductDescription(): String = productDescription
-    fun showProductAttribute(): String = productHighlightAttribute
-    fun showProductPrice(): Double = productPrice
-    fun showProductReference(): String = productReference
-    fun showLongDescription():String = productLongDescription
+class Product(val image:String,
+              val description: String,
+              val highlightAttribute: String,
+              val longDescription:String,
+              val price: Price,
+              val reference:String){
 }
+
+
+@JvmInline
+value class Price (private val price: Double){
+    operator fun compareTo (price: Double): Int {
+        return this.price.compareTo(price)
+    }
+}
+
+//Tell don't ask make it well
