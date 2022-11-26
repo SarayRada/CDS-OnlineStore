@@ -1,7 +1,7 @@
 class OnlineStore(
     private val storeQueries: StoreQueries,
-    private val informationCounter: InformationCounter,
-    private val questionCounter: QuestionCounter,
+    private val informationScreen: InformationScreen,
+    private val questionMaker: QuestionMaker,
     private val shoppingCart: ShoppingCart){
     private fun nextStep(step: String) {
         when(step) {
@@ -15,36 +15,36 @@ class OnlineStore(
         }
     }
     private fun showShoppingCart() {
-        val cart = shoppingCart.productsInCart
-        informationCounter.showShoppingCart(cart)
-        nextStep(questionCounter.askForCheckout())
+        val cart = shoppingCart
+        informationScreen.showShoppingCart(cart)
+        nextStep(questionMaker.askForCheckout())
     }
     private fun showProductInformation() {
-        val reference = questionCounter.askForAProductToExplore()
+        val reference = questionMaker.askForAProductToExplore()
         val product: Product? = storeQueries.getAProduct(reference)
         val howManyOfAProduct = storeQueries.getTheAmountOfAProduct(reference)
-        informationCounter.showProductInformation(product, howManyOfAProduct)
-        nextStep(questionCounter.askForProductNextStep())
+        informationScreen.showProductInformation(product, howManyOfAProduct)
+        nextStep(questionMaker.askForProductNextStep())
     }
     private fun addAProductToCart() {
-        val reference = questionCounter.askForAProductReference()
+        val reference = questionMaker.askForAProductReference()
         val productToShow = storeQueries.getAProduct(reference)
         if (productToShow != null) {
             shoppingCart.addAProductToTheCart(productToShow)
         } else {
-            informationCounter.showNoProductErrorMessage()
+            informationScreen.showNoProductErrorMessage()
         }
     }
     private fun showProductSummary() {
-        val summary = shoppingCart.getLastProductAdded().reference
-        informationCounter.showProductSummary(summary)
-        nextStep(questionCounter.askForCatalogueNextStep())
+        val summary = shoppingCart.getLastProductReferenceAdded()
+        informationScreen.showProductSummary(summary.value)
+        nextStep(questionMaker.askForCatalogueNextStep())
     }
     fun showProducts(){
-        val price = questionCounter.askForProductsLowerThan()
+        val price = questionMaker.askForProductsLowerThan()
         val productsBelowAPrice = storeQueries.getProductsBelowAPrice(price)
-        informationCounter.showProducts(productsBelowAPrice)
-        val nextStep = questionCounter.askForCatalogueNextStep()
+        informationScreen.showProducts(productsBelowAPrice)
+        val nextStep = questionMaker.askForCatalogueNextStep()
         this.nextStep(nextStep)
     }
 }
