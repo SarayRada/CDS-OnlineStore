@@ -1,24 +1,22 @@
 class ShoppingCart(){
-    val productsInCart = ProductsInCart() // code smell lookea -> lista de productos no tienen significados
-    // que me de el total de la compra
+    private val productsInCart = mutableListOf<Product>()
     fun addAProductToTheCart(product: Product) {
         productsInCart.add(product)
     }
-    fun getLastProductAdded():Product{
-        return productsInCart.last()
+    fun getLastProductReferenceAdded():Reference{
+        return productsInCart.last().reference
+    }
+    fun getProductsDifferentReference():List<Product>{
+        return productsInCart.distinctBy { it.reference.value }
+    }
+    fun getUnitsByReference(reference:Reference):Int {
+        return productsInCart.count { it.reference.value == reference.value }
+    }
+    fun calculateSubtotal(price: Price, reference: Reference):Double{
+        return (price.value) * productsInCart.count { it.reference.value == reference.value }
+    }
+    fun totalOfShopping():Double{
+        return productsInCart.sumOf { it.price.value }
     }
 }
-data class ProductsInCart(val value:MutableList<Product>){
-    fun calculateTotalPrice():Double{} //¿por qué lo hacemos aquí? Para que siga la regla de la encapsulación -->
-    // pensar en la cajera hija de ...
-}
 
-// TELL DON'T ASK
-// Pensar en: Procesos, responsabilidades --> ordenarlo en componentes (con sus limites) y sus colaboradores
-//Data class está pensada para que pueda ser usada como value objects
-// Tener en mente el saber que estás haciendo
-//En Kotlin te aseguras que puedes acceder al valor que envuelves si tener el getter
-/*
-Crear cadena de COLABORADORES! -> poner limite de las responsabilidades.
-- Software modular, extensible y testeable
- */
